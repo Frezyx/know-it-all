@@ -1,0 +1,19 @@
+<script>
+    var modal = document.getElementById('myModal');
+    
+    var btn = document.getElementById("myBtn");
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+    
+    var span = document.getElementById("knowItAllClose");
+    span.onclick = function() {
+        document.getElementById('myModal').style.display = "none"
+    }
+    
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
