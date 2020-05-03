@@ -31,10 +31,6 @@ else{
     }
 }
 
-
-//TODO: Сохранять в бд значения страницы и буквы
-
-
 $path = "https://gufo.me/dict/kuznetsov?page=".$pageNum."&letter=".$chars[$charIndex];
 $data = file_get_html($path);
 
@@ -68,32 +64,4 @@ if($data->innertext!='' and count($data->find('div #all_words'))){
 
     file_get_contents($server_link.$main."?charNum=".$charIndex."&pageIndex=".$pageNum);
 }
-
-// function getLink($data, $path){
-//     $links = $data->find('#next-page-control div a');
-//     if(count($links) == 1 && ($links[0]->innertext == "Назад" || $links[0]->rel == "prev")){
-        
-//         require 'connect.php';
-//         $query = mysqli_query($link, "SELECT * FROM links ORDER BY id DESC LIMIT 1");
-//         $data = mysqli_fetch_array($query);
-
-//         $charNum = 1 + (int)$data["charNum"];
-
-//         $nowId = $data['id'];
-//         mysqli_query($link, "UPDATE `links` SET `charNum` = '$charNum' WHERE `links`.`id` = '$nowId';");
-
-//         $data2 = file_get_html($path);
-//         $charPanel = $data2->find('#abc table tbody tr td');
-
-//         $panel = str_get_html($charPanel[0]);
-//         $linkToNext = $panel->find("a")[$charNum - 1]->href;
-//         header('Location: '.$server_link.$main."?path=".$linkToNext);
-//         die();
-//     }
-//     else{
-//         $nexLink = count($links) == 1? $links[0]->href: $links[1]->href;
-//     }
-//     return $nexLink;
-// }
-
 ?>

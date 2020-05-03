@@ -6,16 +6,14 @@
     "content_scripts":[
         {
             "matches": ["<all_urls>"],
-            "js": ["js/content.js", "js/popup.js", "js/background.js", "js/so.js"]
+            "js": ["js/content.js", "js/popup.js", "js/background.js"]
         }
     ],
     "browser_action": {
         "default_popup": "popup.html",
         "default_title": "Поиск информации о непонятных словах на веб страницах"
     },
-    "web_accessible_resources": [
-        "modal.html","modal2.html", "modal-logic.html", "js/injected.js"
-    ],
+    "web_accessible_resources": [],
 
     "permissions": [
         "activeTab" , "http://10.4.148.13/know-it-all/server/php/*"

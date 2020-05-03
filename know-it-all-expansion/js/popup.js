@@ -2,7 +2,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     chrome.tabs.executeScript( {code: "window.getSelection().toString();"}, 
     function(selection) {
-
         var txt = document.createElement('textarea');
         txt.innerHTML = selection;
         var req = txt.value;
@@ -20,12 +19,4 @@ document.addEventListener('DOMContentLoaded', function () {
             };
             xhr.send(null);
     });
-
-    // function htmldecode (str){
-
-    //     var txt = document.createElement('textarea');
-    //     txt.innerHTML = str;
-    //     return txt.value;
-    //   }
-
 }, false)
