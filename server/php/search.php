@@ -11,19 +11,31 @@ if(isset($_GET["word"])){
             ENT_COMPAT, 
             "UTF-8"
          );
-        $word = strtolower($word);
-        // echo gettype ($word);
+        // $word = strtolower($word);
+        $path = "https://gufo.me/dict/kuznetsov/".$word;
 
-        $query = mysqli_query($link, "SELECT * FROM `links` WHERE `name` LIKE '%$word%'");
-        $row = mysqli_fetch_assoc($query); 
-        if(isset($row["path"])){
-            echo $row["path"]; 
-            $path = "https://gufo.me/".$row["path"];
-            $data = file_get_html($path);
+        $data = file_get_html($path);
+        foreach ($data->find('#dictionary-acticle article') as $table) {
+            $column = str_get_html($table);
+            foreach ($column->find('p') as $line) {
+                echo str_get_html($line);
+            }
         }
-        else{
-            echo "Я не смог найти объяснение этому слову";
-        }
+
+        #dictionary-acticle > article
+
+        // $query = mysqli_query($link, "SELECT * FROM `links` WHERE `name` = '$word'");
+        // $row = mysqli_fetch_assoc($query); 
+        // echo $row["path"]; 
+
+
+        // if($count < 1){
+        //     echo "Я не смог найти объяснение этому слову";
+        // }
+        // else{ 
+        // echo $data["path"]; 
+        // }
+
     }
     else{
         echo "1";
