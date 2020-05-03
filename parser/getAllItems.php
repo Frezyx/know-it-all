@@ -36,7 +36,6 @@ else{
 
 
 $path = "https://gufo.me/dict/kuznetsov?page=".$pageNum."&letter=".$chars[$charIndex];
-
 $data = file_get_html($path);
 
 if($data->innertext!='' and count($data->find('div #all_words'))){
@@ -45,24 +44,27 @@ if($data->innertext!='' and count($data->find('div #all_words'))){
         foreach ($data->find('div #all_words') as $table) {
 
             $column1 = str_get_html($table->find("div .col-sm-12")[0]);
-            if( count( $table->find( "div .col-sm-12")) > 1 ) {
-                $column2 = str_get_html($table->find("div .col-sm-12")[1]);
-            }
-            else{
-                $charIndex += 1;
-                $pageNum = 0;
-                file_get_contents($server_link.$main."?charNum=".$charIndex."&pageIndex=".$pageNum);
-            }
 
             foreach ($column1->find("ul li a") as $line) {
                 file_get_contents($server_link.$sendData."?name=".$line->innertext."&path=".$line->href."&charNum=".$charIndex."&pageIndex=".$pageNum);
             }
 
-            foreach ($column2->find("ul li a") as $line) {
+            if( count( $table->find( "div .col-sm-12")) > 1 ) {
+                $column2 = str_get_html($table->find("div .col-sm-12")[1]);
+                foreach ($column2->find("ul li a") as $line) {
+                    file_get_contents($server_link.$sendData."?name=".$line->innertext."&path=".$line->href."&charNum=".$charIndex."&pageIndex=".$pageNum);
+                }
+            }
+            else if(count($column2->find("ul li a"))< 50){
+                $charIndex += 1;
+                $pageNum = 0;
                 file_get_contents($server_link.$sendData."?name=".$line->innertext."&path=".$line->href."&charNum=".$charIndex."&pageIndex=".$pageNum);
             }
+            else{
+                $charIndex += 1;
+                $pageNum = 0;
+            }
         }
-        sleep(5);
 
     file_get_contents($server_link.$main."?charNum=".$charIndex."&pageIndex=".$pageNum);
 }

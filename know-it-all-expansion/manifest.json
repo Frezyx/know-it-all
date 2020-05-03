@@ -6,7 +6,7 @@
     "content_scripts":[
         {
             "matches": ["<all_urls>"],
-            "js": ["js/content.js", "js/popup.js", "js/jquery.min.js", "js/background.js", "js/so.js"]
+            "js": ["js/content.js", "js/popup.js", "js/background.js", "js/so.js"]
         }
     ],
     "browser_action": {
@@ -18,7 +18,8 @@
     ],
 
     "permissions": [
-        "activeTab"
+        "activeTab" , "http://10.4.148.13/know-it-all/server/php/*"
     ]
+    
     
 }
